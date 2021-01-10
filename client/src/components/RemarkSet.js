@@ -17,16 +17,26 @@ function RemarkSet(props) {
     <div className={`remark-flex-wrap`}>
       <div className={`remark-flex-side`}>
         <Remark className={`remark-flex-item`} editable={editable} userId={props.userId}/>
-        <LongButton buttonText={buttonText} editable={editable} onModeChange={toggleEditable} />
+        { props.userId ?
+          <LongButton buttonText={buttonText} editable={editable} onModeChange={toggleEditable} />
+          :
+          null
+        }
       </div>
-      <div className={`remark-flex-side`}>
-        <Remark className={`remark-flex-item`} editable={editable} />
-        <LongButton
-          buttonText={buttonText}
-          editable={editable}
-          onModeChange={toggleEditable}
-        />
-      </div>
+      {props.userId ?
+        <>
+        <div className={`remark-flex-side`}>
+          <Remark className={`remark-flex-item`} editable={editable}/>
+          <LongButton
+            buttonText={buttonText}
+            editable={editable}
+            onModeChange={toggleEditable}
+          />
+        </div>
+        </>
+        :
+        null
+      }
     </div>
   );
 }
