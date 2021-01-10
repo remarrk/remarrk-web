@@ -27,6 +27,6 @@
     background-color: $blue;
     @include transform(translateX(calc(-100vw + 5rem)));
     h2 {
-        @include transform(rotate(-180deg));
+        @include transform(scale(-1));
     }
 }
