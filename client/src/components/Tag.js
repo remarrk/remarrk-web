@@ -1,13 +1,16 @@
-import React from 'react'
+import React from 'react';
 // import '../styles/tag.scss';
 
-function Tag({ tagName, isTagActive, isEditingRemark}) {
-    return (
-        isEditingRemark ?
-            isTagActive ? <button class="btn-rect btn-blue">{tagName}</button>
-                        : <button class="btn-rect btn-blue-outline">{tagName}</button>
-            : <button class="btn-rect btn-peach">{tagName}</button>
-    )
+function Tag({ tagName, isTagActive, onTagChanged, editable }) {
+  const getButtonType = () => {
+    return editable ? (isTagActive ? 'btn-blue' : 'btn-blue-outline') : 'btn-peach';
+  };
+
+  return (
+    <button className={`btn-rect ${getButtonType()}`} onClick={() => onTagChanged(tagName)}>
+      {tagName}
+    </button>
+  );
 }
 
-export default Tag
+export default Tag;

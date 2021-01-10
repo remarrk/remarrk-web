@@ -4,10 +4,10 @@ import TagList from './TagList';
 
 function Remark(props) {
   const [message, setMessage] = useState('');
-  const [tags, setTags] = useState([]);
-  const [isTagActive, setIsTagActive] = useState([]);
+  const [tags, setTags] = useState({});
 
   const getTags = () => {
+    if (!props.editable) return;
     axios.get('http://localhost:3001/get-tags').then((res) => {
       console.log(res.data);
       setTags(res.data);
@@ -36,7 +36,7 @@ function Remark(props) {
     }
   };
 
-  useEffect(getTags, []);
+  useEffect(getTags, [props.editable]);
   useEffect(() => console.log("yo"), [tags]);
 
   return (
@@ -51,8 +51,7 @@ function Remark(props) {
         <TagList
           editable={props.editable}
           tags={tags}
-          isTagActive={isTagActive}
-          onIsTagActiveChanged={setIsTagActive}
+          onTagsChanged={setTags}
         />
       </div>
       <button onClick={handleClick}>{props.editable ? 'Send' : 'See another...'}</button>
