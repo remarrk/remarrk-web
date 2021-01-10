@@ -35,6 +35,18 @@ app.get('/get-favourites', (req, res) => {
   remarks.getFavourites(userId).then((favs) => res.send(favs));
 });
 
+app.post('/upvote', (req, res) => {
+  let userId = req.body.userId;
+  let remarkId = req.body.remarkId;
+  remarks.upvoteRemark(userId, remarkId).then(() => res.end());
+});
+
+app.get('/downvote', (req, res) => {
+  let userId = req.body.userId;
+  let remarkId = req.body.remarkId;
+  remarks.downvoteRemark(userId, remarkId).then(() => res.end());
+});
+
 app.listen(port, () => {
   console.log(`Example app listening at http://localhost:${port}`);
 });
