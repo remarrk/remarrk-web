@@ -9,25 +9,23 @@ const port = 3001;
 import remarks from './routes/remark.js';
 
 app.post('/add-remark', (req, res) => {
-    let remark = {
-        message: req.body.message,
-        tags: req.body.tags,
-    };
-    remarks.addRemark(remark)
-        .then(() => {
-            res.end();
-        });
+  let remark = {
+    message: req.body.message,
+    tags: req.body.tags,
+  };
+  remarks.addRemark(remark).then(() => {
+    res.end();
+  });
 });
 
 app.get('/get-random-remark', (req, res) => {
-    remarks.getRandomRemark()
-        .then((snapshot) => {
-            let remarks = snapshot.docs;
-            let randIndex = Math.floor(Math.random() * remarks.length);
-            res.send(remarks[randIndex].data());
-        });
+  remarks.getRandomRemark().then((snapshot) => {
+    let remarks = snapshot.docs;
+    let randIndex = Math.floor(Math.random() * remarks.length);
+    res.send(remarks[randIndex].data());
+  });
 });
 
 app.listen(port, () => {
-    console.log(`Example app listening at http://localhost:${port}`);
+  console.log(`Example app listening at http://localhost:${port}`);
 });
