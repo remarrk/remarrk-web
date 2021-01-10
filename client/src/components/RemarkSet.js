@@ -5,16 +5,18 @@ import '../styles/remarkSet.scss';
 
 function RemarkSet() {
     let [editable, setEditable] = useState(false);
+    let [buttonText, setButtonText] = useState('+ New');
 
     const toggleEditable = () => {
         console.log(`toggled editable ${editable}`);
         setEditable(!editable);
+        setButtonText(editable ? `+ New` : `Browse`);
     };
 
   return (
     <div className={`remark-flex-side`}>
       <Remark className={`remark-flex-item`} editable={editable} />
-      <LongButton buttonText={`+ New`} editable={editable} onModeChange={toggleEditable} />
+      <LongButton buttonText={buttonText} editable={editable} onModeChange={toggleEditable} />
     </div>
   );
 }

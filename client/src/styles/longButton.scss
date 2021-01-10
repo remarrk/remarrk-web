@@ -2,8 +2,6 @@
     height: 15%;
     width: 1/12;
     position: fixed;
-    float: right;
-    right: 0;
     top: 30%;
     cursor: pointer;
     display: table;
@@ -12,14 +10,23 @@
         display: table-cell;
         vertical-align: middle;
         margin: 0 auto;
-        transform: rotate(90deg);
     }
 }
 
 .long-button-peach {
     background-color: var(--peach);
+    float: right;
+    right: 0;
+    p {
+        transform: rotate(90deg);
+    }
 }
 
 .long-button-blue {
     background-color: var(--blue);
+    float: left;
+    left: 0;
+    p {
+        transform: rotate(-90deg);
+    }
 }
