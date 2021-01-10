@@ -3,7 +3,7 @@ import Remark from './Remark';
 import LongButton from './LongButton';
 import '../styles/remarkSet.scss';
 
-function RemarkSet(props) {
+function RemarkSet() {
     let [editable, setEditable] = useState(false);
     let [buttonText, setButtonText] = useState('+ New');
 
@@ -16,7 +16,7 @@ function RemarkSet(props) {
   return (
     <div className={`remark-flex-wrap`}>
     <div className={`remark-flex-side`}>
-      <Remark className={`remark-flex-item`} editable={editable} userId={props.userId}/>
+      <Remark className={`remark-flex-item`} editable={editable} />
       <LongButton buttonText={buttonText} editable={editable} onModeChange={toggleEditable} />
     </div>
     </div>
