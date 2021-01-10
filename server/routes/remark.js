@@ -29,6 +29,24 @@ const getTags = async () => {
     });
 };
 
+const upvoteRemark = async (userId, remarkId) => {
+  return db
+    .collection('remarks')
+    .doc(remarkId)
+    .collection('votes')
+    .doc(userId)
+    .set({ score: 1 });
+};
+
+const downvoteRemark = async (userId, remarkId) => {
+  return db
+    .collection('remarks')
+    .doc(remarkId)
+    .collection('votes')
+    .doc(userId)
+    .set({ score: -1 });
+};
+
 const addFavourite = async (userId, remarkId) => {
   return db
     .collection('favourites')
@@ -41,8 +59,14 @@ const getFavourites = async (userId) => {
     .collection('favourites')
     .doc(userId)
     .get()
-    .then((snapshot) => {
-      return Object.values(snapshot.data());
+    .then(async (f) => {
+      let favIds = Object.keys(f.data());
+      return db
+        .collection('remarks')
+        .get()
+        .then((r) => {
+          return r.docs.filter((doc) => favIds.includes(doc.id)).map((doc) => doc.data());
+        });
     });
 };
 
@@ -52,4 +76,6 @@ export default {
   getTags,
   addFavourite,
   getFavourites,
+  upvoteRemark,
+  downvoteRemark,
 };

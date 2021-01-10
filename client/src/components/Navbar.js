@@ -20,7 +20,13 @@ function Navbar(props) {
           </div>
           :
           <div className="nav-navigation">
-            <button onClick={e => props.onClick(e, 1)}>login</button>
+            {
+              props.state === 2 ?
+                null
+                :
+                <button onClick={e => props.onClick(e, 2)}>login</button>
+            }
+
           </div>
       }
     </div>

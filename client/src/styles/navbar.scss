@@ -20,10 +20,8 @@
     top: 0.6rem;
   }
 
-  h2, button {
-    cursor: pointer;
-  }
   h2 {
+    cursor: pointer;
     margin: 0;
   }
   button {
@@ -33,8 +31,7 @@
     text-align: center;
     text-decoration: none;
     display: inline-block;
-    font-weight: 600;
-    font-size: 1.5rem;
+    font-size: 1.3rem;
     margin-left: 1rem;
   }
 }

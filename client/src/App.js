@@ -14,58 +14,51 @@ import Navbar from "./components/Navbar";
 
 function App() {
   /* STATES ID's
-   * NOT LOGGED IN:
-   * 0 -> Home
-   * 1 -> Log In
-   * 2 -> Sign Up
-   * LOGGED IN:
    * 0 -> Home
    * 1 -> Favourites
+   * 2 -> Log In
+   * 3 -> Sign Up
    */
   const [state, setState] = useState(0);
-
   function setAppState(e, id) {
     e.preventDefault();
     setState(id);
   }
+
+  const elementList = [];
 
   return (
     <FirebaseAuthProvider {...firebaseConfig} firebase={firebase}>
       <div className='App'>
         <FirebaseAuthConsumer>
           {({isSignedIn}) => {
-            if (isSignedIn) {
-              return (
-                <>
-                  <Navbar signedIn={isSignedIn} onClick={setAppState}/>
-                  {
-                    state === 0 ?
-                      <>
-                        <RemarkSet />
-                      </>
-                      :
-                      <>
-                        <h1>Favourites</h1>
-                      </>
-                  }
-                </>
-              );
-            } else {
-              return (
-                <>
-                  <Navbar signedIn={isSignedIn} onClick={setAppState}/>
-                  {
-                    state === 0 ?
-                      <h1>You are not logged in</h1>
-                      :
-                      state === 1 ?
-                        <Login/>
-                        :
-                        <Signup/>
-                  }
-                </>
+            elementList.length = 0;
+            elementList.push(<Navbar key="nav" signedIn={isSignedIn} state={state} onClick={setAppState}/>)
+
+            state === 0 ?
+              elementList.push(
+                <div key="remarks">
+                  <RemarkSet />
+                </div>
               )
-            }
+              :
+              state === 1 && isSignedIn ?
+                elementList.push(
+                  <h1 key="favourites">Favourites</h1>
+                )
+                :
+                state === 3 && !isSignedIn ?
+                  elementList.push(
+                    <Signup key="signup" onClick={setAppState}/>
+                  )
+                  :
+                  elementList.push(
+                    <Login key="login" onClick={setAppState}/>
+                  )
+
+            return (<div>
+              {elementList}
+            </div>)
           }}
         </FirebaseAuthConsumer>
       </div>
