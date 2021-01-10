@@ -8,7 +8,7 @@ const addRemark = (body) => {
   return db.collection('remarks').add(remark);
 };
 
-const getRandomRemark = () => {
+const getRandomRemark = async () => {
   return db
     .collection('remarks')
     .get()
@@ -19,16 +19,15 @@ const getRandomRemark = () => {
     });
 };
 
-const getTags = () => {
-  return new Promise((resolve) => {
-    db.collection('tags')
-      .get()
-      .then((snapshot) => {
-        let tags = {};
-        snapshot.docs.forEach((doc) => tags[doc.data().tag] = false);
-        resolve(tags);
-      });
-  });
+const getTags = async () => {
+  return db
+    .collection('tags')
+    .get()
+    .then((snapshot) => {
+      let tags = {};
+      snapshot.docs.forEach((doc) => (tags[doc.data().tag] = false));
+      return tags;
+    });
 };
 
 export default {
