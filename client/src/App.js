@@ -21,16 +21,7 @@ function App() {
   };
 
 // export default App;
-import Router from './Router';
-import React from 'react'
-import  configureStore  from './redux';
-import { Provider } from 'react-redux';
 
-
-const store = configureStore();
-
-
-const App = () => {
   return (
     <div className='App'>
       <label>Message:</label>
@@ -46,6 +37,6 @@ const App = () => {
       <p>Tags: {remark ? remark.tags.join(', ') : ''}</p>
     </div>
   );
-}
+  }
 
 export default App
