@@ -1,5 +1,6 @@
 import { useState, useEffect } from 'react';
 import Tag from './Tag';
+import '../styles/tagList.scss';
 
 function TagList({ editable, tags, onTagsChanged }) {
   const [tagsJSX, setTagsJSX] = useState([]);
@@ -28,7 +29,7 @@ function TagList({ editable, tags, onTagsChanged }) {
 
   useEffect(renderTags, [tags, editable, onTagsChanged]);
 
-  return <div>{tagsJSX}</div>;
+  return <div className={`tag-list`}>{tagsJSX}</div>;
 }
 
 export default TagList;

@@ -1,6 +1,6 @@
 import React, {useState} from 'react';
 
-import Remark from './components/Remark';
+import RemarkSet from './components/RemarkSet';
 import './styles/styles.scss';
 
 import firebase from "firebase/app";
@@ -41,8 +41,7 @@ function App() {
                   {
                     state === 0 ?
                       <>
-                        <Remark editable={true}/>
-                        <Remark editable={false}/>
+                        <RemarkSet />
                       </>
                       :
                       <>

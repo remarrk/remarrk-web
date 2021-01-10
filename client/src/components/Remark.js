@@ -51,25 +51,36 @@ function Remark(props) {
     return editable ? `Make someone's day...` : `Get ready for something swell ✨`;
   };
 
+  const getEditable = () => {
+    let { editable } = props;
+    return editable ? `editable` : `display`;
+  };
+
   return (
-    <div>
-      <div className={`remark-wrapper remark-wrapper-${getCurrentColor()} shadow-${getCurrentColor()}`}>
-        <div className={`remark-text`}>
-            <textarea
-            className="remark-input"
-            readOnly={!props.editable}
-            placeholder={`${getPlaceholder()}`}
-            value={message}
-            onChange={(e) => setMessage(e.target.value)}
-            />
-        </div>
-        <TagList
-          editable={props.editable}
-          tags={tags}
-          onTagsChanged={setTags}
-        />
+    <div className={`remark-sides`}>
+        <div className={`remark-${getEditable()}-item`}>
+            <div className={`remark-wrapper remark-wrapper-${getCurrentColor()} shadow-${getCurrentColor()}`}>
+                <div className={`remark-text`}>
+                    <textarea
+                    className="remark-input"
+                    readOnly={!props.editable}
+                    placeholder={`${getPlaceholder()}`}
+                    value={message}
+                    onChange={(e) => setMessage(e.target.value)}
+                    />
+                </div>
+                <TagList
+                editable={props.editable}
+                tags={tags}
+                onTagsChanged={setTags}
+                />
+            </div>
       </div>
-      <button onClick={handleClick}>{props.editable ? 'Send' : 'See another...'}</button>
+      <div className={`remark-${getEditable()}-item`}>
+      { props.editable ? 
+        <button className={`btn-circle btn-blue shadow-blue`} onClick={handleClick}>{`Send`}</button>
+        : <button className={`btn-rect btn-peach shadow-peach`} onClick={handleClick}>{`See another`}</button>}
+        </div>
     </div>
   );
 }
