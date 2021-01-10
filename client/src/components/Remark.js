@@ -1,6 +1,7 @@
 import { useState, useEffect } from 'react';
 import axios from 'axios';
 import TagList from './TagList';
+import '../styles/remark.scss';
 
 function Remark(props) {
   const [message, setMessage] = useState('');
@@ -39,15 +40,28 @@ function Remark(props) {
 
   useEffect(getTags, [props.editable]);
 
+  const wrapperClass = () => {
+      let { editable } = props;
+      return editable ? `remark-wrapper-blue` : `remark-wrapper-peach`;
+  };
+
+  const getPlaceholder = () => {
+    let { editable } = props;
+    return editable ? `Make someone's day...` : `Get ready for something swell ✨`;
+  };
+
   return (
     <div>
-      <div>
-        <input
-          readOnly={!props.editable}
-          placeholder={"Make someone's day..."}
-          value={message}
-          onChange={(e) => setMessage(e.target.value)}
-        />
+      <div className={`remark-wrapper ${wrapperClass()}`}>
+        <div className={`remark-text`}>
+            <textarea
+            className="remark-input"
+            readOnly={!props.editable}
+            placeholder={`${getPlaceholder()}`}
+            value={message}
+            onChange={(e) => setMessage(e.target.value)}
+            />
+        </div>
         <TagList
           editable={props.editable}
           tags={tags}

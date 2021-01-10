@@ -58,8 +58,15 @@ code {
   --blue: #66C4EC;
   --dark: #1b1b1b;
   --light: #ffffff;
+
+  --peach-shadow: rgba(255, 137, 111, 0.35);
   font-family: 'Manrope', sans-serif;
   font-size: 16px;
+}
+
+// Removing the Chrome onFocus outline 
+input:focus, textarea:focus, select:focus, button:focus {
+  outline: none;
 }
 
 // Buttons
