@@ -8,9 +8,7 @@ function LongButton({ buttonText, editable, onModeChange }) {
 
     return (
         <div className={`long-button long-button-${getCurrentColor()}`} onClick={onModeChange}>
-            <p>
-                {buttonText}
-            </p>
+            <h2>{buttonText}</h2>
         </div>
     )
 }

@@ -1,32 +1,32 @@
-.long-button {
-    height: 15%;
-    width: 1/12;
-    position: fixed;
-    top: 30%;
-    cursor: pointer;
-    display: table;
+@import "styles.scss";
 
-    p {
-        display: table-cell;
-        vertical-align: middle;
-        margin: 0 auto;
+.long-button {
+    height: 100%;
+    width: 5rem;
+    position: fixed;
+    right: 0;
+    cursor: pointer;
+
+    h2 {
+        height: 100%;
+        width: 2rem;
+        text-align: center;
+        writing-mode: vertical-lr;
+        text-orientation: mixed;
+        margin-left: auto;
+        margin-right: auto;
+        margin-top: -2rem;
     }
 }
 
 .long-button-peach {
-    background-color: var(--peach);
-    float: right;
-    right: 0;
-    p {
-        transform: rotate(90deg);
-    }
+    background-color: $peach;
 }
 
 .long-button-blue {
-    background-color: var(--blue);
-    float: left;
-    left: 0;
-    p {
-        transform: rotate(-90deg);
+    background-color: $blue;
+    @include transform(translateX(calc(-100vw + 5rem)));
+    h2 {
+        @include transform(rotate(-180deg));
     }
 }
