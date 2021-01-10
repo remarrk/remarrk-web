@@ -1,11 +1,10 @@
 import db from '../db/firebase.js';
 
-const addRemark = (body) => {
-  let remark = {
-    message: body.message,
-    tags: body.tags,
-  };
-  return db.collection('remarks').add(remark);
+const addRemark = async (message, tags) => {
+  return db.collection('remarks').add({
+    message: message,
+    tags: tags,
+  });
 };
 
 const getRandomRemark = async () => {
@@ -30,8 +29,31 @@ const getTags = async () => {
     });
 };
 
+const addFavourite = async (userId, remarkId) => {
+  return db.collection('favourites').doc(userId).set(
+    {
+      remarkId: remarkId,
+    },
+    {
+      merge: true,
+    }
+  );
+};
+
+const getFavourites = async (userId) => {
+  return db
+    .collection('favourites')
+    .doc(userId)
+    .get()
+    .then((snapshot) => {
+      return snapshot.docs.map(doc => doc.data().remarkId);
+    });
+};
+
 export default {
   addRemark,
   getRandomRemark,
   getTags,
+  addFavourite,
+  getFavourites,
 };
