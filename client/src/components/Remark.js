@@ -5,6 +5,6 @@ function Remark() {
     return (
         <div>Hi</div>
     );
-};
+}
 
 export default Remark;
