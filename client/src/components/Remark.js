@@ -17,12 +17,14 @@ function Remark(props) {
     axios.get('http://localhost:3001/get-random-remark').then((res) => {
       let remark = res.data;
       setMessage(remark.message);
-      setTags(remark.tags);
+      let newTags = {};
+      remark.tags.forEach((tag) => newTags[tag] = false);
+      setTags(newTags);
     });
   };
 
   const sendRemark = () => {
-    axios.post('http://localhost:3001/add-remark', { message: message, tags: tags }).then((res) => {
+    axios.post('http://localhost:3001/add-remark', { message: message, tags: Object.keys(tags) }).then((res) => {
       console.log("Remark added. This is where we'd clear those fields and give user feedback.");
     });
   };
