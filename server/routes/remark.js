@@ -1,14 +1,13 @@
 import db from '../db/firebase.js';
 
-const addRemark = (body) => {
-  let remark = {
-    message: body.message,
-    tags: body.tags,
-  };
-  return db.collection('remarks').add(remark);
+const addRemark = async (message, tags) => {
+  return db.collection('remarks').add({
+    message: message,
+    tags: tags,
+  });
 };
 
-const getRandomRemark = () => {
+const getRandomRemark = async () => {
   return db
     .collection('remarks')
     .get()
@@ -19,20 +18,42 @@ const getRandomRemark = () => {
     });
 };
 
-const getTags = () => {
-  return new Promise((resolve) => {
-    db.collection('tags')
-      .get()
-      .then((snapshot) => {
-        let tags = {};
-        snapshot.docs.forEach((doc) => tags[doc.data().tag] = false);
-        resolve(tags);
-      });
-  });
+const getTags = async () => {
+  return db
+    .collection('tags')
+    .get()
+    .then((snapshot) => {
+      let tags = {};
+      snapshot.docs.forEach((doc) => (tags[doc.data().tag] = false));
+      return tags;
+    });
+};
+
+const addFavourite = async (userId, remarkId) => {
+  return db.collection('favourites').doc(userId).set(
+    {
+      remarkId: remarkId,
+    },
+    {
+      merge: true,
+    }
+  );
+};
+
+const getFavourites = async (userId) => {
+  return db
+    .collection('favourites')
+    .doc(userId)
+    .get()
+    .then((snapshot) => {
+      return snapshot.docs.map(doc => doc.data().remarkId);
+    });
 };
 
 export default {
   addRemark,
   getRandomRemark,
   getTags,
+  addFavourite,
+  getFavourites,
 };
