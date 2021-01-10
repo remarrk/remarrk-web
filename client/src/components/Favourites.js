@@ -16,14 +16,13 @@ function Favourites(props) {
   }
 
   useEffect(() => {
-    setFavourites(getFavourites(props.userId));
-  });
+    getFavourites(props.userId)
+  })
 
   return (
     <div>
       {
-        null
-        //favourites.map(favourite => console.log(favourite.message))
+        getFavourites(props.userId).map(favourite => console.log(favourite.message))
         //favourites.map(favourite => <div>{favourite.message}</div>)
       }
     </div>
