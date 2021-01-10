@@ -10,7 +10,7 @@ function Signup(props) {
   function matchPasswords(e, email, password) {
     if (password === passwordMatch)
       signUpEmail(e, email, password)
-        .then(process => {
+        .then(() => {
           props.onClick(e, 0);
         })
         .catch(error => {
