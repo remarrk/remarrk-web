@@ -41,7 +41,7 @@ app.post('/upvote', (req, res) => {
   remarks.upvoteRemark(userId, remarkId).then(() => res.end());
 });
 
-app.get('/downvote', (req, res) => {
+app.post('/downvote', (req, res) => {
   let userId = req.body.userId;
   let remarkId = req.body.remarkId;
   remarks.downvoteRemark(userId, remarkId).then(() => res.end());
