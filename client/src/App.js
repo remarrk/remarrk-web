@@ -56,9 +56,9 @@ function App() {
                     <Login key="login" onClick={setAppState}/>
                   )
 
-            return (<div>
+            return (<>
               {elementList}
-            </div>)
+            </>)
           }}
         </FirebaseAuthConsumer>
       </div>

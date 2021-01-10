@@ -14,9 +14,11 @@ function RemarkSet() {
     };
 
   return (
+    <div className={`remark-flex-wrap`}>
     <div className={`remark-flex-side`}>
       <Remark className={`remark-flex-item`} editable={editable} />
       <LongButton buttonText={buttonText} editable={editable} onModeChange={toggleEditable} />
+    </div>
     </div>
   );
 }

@@ -8,7 +8,7 @@ function Login(props) {
 
   function signInWithEmail(e, email, password) {
     signInEmail(e, email, password)
-      .then(process => {
+      .then(() => {
         props.onClick(e, 0);
       })
       .catch(error => {
@@ -18,7 +18,7 @@ function Login(props) {
 
   function signInWithGoogle(e) {
     signInGoogleAuth(e)
-      .then(process => {
+      .then(() => {
         props.onClick(e, 0);
       })
   }
