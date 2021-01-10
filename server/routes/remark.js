@@ -8,7 +8,19 @@ const getRandomRemark = () => {
   return db.collection('remarks').get();
 };
 
+const getTags = () => {
+  return new Promise((resolve) => {
+    db.collection('tags')
+      .get()
+      .then((snapshot) => {
+        let tags = snapshot.docs.map((doc) => doc.data().tag);
+        resolve(tags);
+      });
+  });
+};
+
 export default {
   addRemark,
   getRandomRemark,
+  getTags,
 };

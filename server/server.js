@@ -26,6 +26,10 @@ app.get('/get-random-remark', (req, res) => {
   });
 });
 
+app.get('/get-tags', (req, res) => {
+  remarks.getTags().then((tags) => res.send(tags));
+});
+
 app.listen(port, () => {
   console.log(`Example app listening at http://localhost:${port}`);
 });
