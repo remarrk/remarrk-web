@@ -60,6 +60,7 @@ const getFavourites = async (userId) => {
     .doc(userId)
     .get()
     .then(async (f) => {
+      if (!f.data()) return [];
       let favIds = Object.keys(f.data());
       return db
         .collection('remarks')
