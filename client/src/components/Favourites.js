@@ -1,8 +1,7 @@
-import React, {useEffect, useState} from 'react';
+import React from 'react';
 import axios from "axios";
 
 function Favourites(props) {
-  const [favourites, setFavourites] = useState(null);
 
   const getFavourites = (userId) => {
     axios.get(`http://localhost:3001/get-favourites?userId=${userId}`)
@@ -14,10 +13,6 @@ function Favourites(props) {
         return null;
       })
   }
-
-  useEffect(() => {
-    getFavourites(props.userId)
-  })
 
   return (
     <div>
