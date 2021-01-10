@@ -20,6 +20,8 @@ function App() {
     });
   };
 
+// export default App;
+
   return (
     <div className='App'>
       <label>Message:</label>
@@ -35,6 +37,6 @@ function App() {
       <p>Tags: {remark ? remark.tags.join(', ') : ''}</p>
     </div>
   );
-}
+  }
 
-export default App;
+export default App
