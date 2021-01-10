@@ -3,6 +3,7 @@ $peach: #FF896F;
 $blue: #66C4EC;
 $dark: #1b1b1b;
 $light: #ffffff;
+$error: #FF896F;
 
 @mixin transform($property) {
   -webkit-transform: $property;
