@@ -36,3 +36,69 @@
     transform: rotate(360deg);
   }
 }
+
+// Fonts
+@import url('https://fonts.googleapis.com/css2?family=Manrope:wght@200;300;400;500;600;700;800&display=swap');
+
+// From index.css
+body {
+  margin: 0;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+code {
+  font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
+    monospace;
+}
+
+// Root colours and sizes
+:root {
+  --peach: #FF896F;
+  --blue: #66C4EC;
+  --dark: #1b1b1b;
+  --light: #ffffff;
+  font-family: 'Manrope', sans-serif;
+  font-size: 16px;
+}
+
+// Buttons
+.btn-rect {
+    padding: 0.5rem 1.5rem;
+    border-radius: 0.5rem;
+    border-width: 0.1rem;
+    border-style: solid;
+    font-weight: 600;
+    transition: all .3s cubic-bezier(0.445, 0.05, 0.55, 0.95);
+}
+
+.btn-rect:hover {
+  background-color: transparent;
+  color: var(--dark);
+  border-color: var(--dark);
+  cursor: pointer;
+}
+
+.btn-peach {
+  background-color: var(--peach);
+  color: var(--dark);
+  border-color: var(--peach);
+}
+
+.btn-peach-outline {
+  background-color: transparent;
+  color: var(--peach);
+  border-color: var(--peach);
+}
+
+.btn-blue {
+  background-color: var(--blue);
+  color: var(--dark);
+  border-color: var(--blue);
+}
+
+.btn-blue-outline {
+  background-color: transparent;
+  color: var(--blue);
+  border-color: var(--blue);
+}
