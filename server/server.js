@@ -31,7 +31,7 @@ app.post('/add-favourite', (req, res) => {
 });
 
 app.get('/get-favourites', (req, res) => {
-  let userId = req.body.userId;
+  let userId = req.query.userId;
   remarks.getFavourites(userId).then((favs) => res.send(favs));
 });
 

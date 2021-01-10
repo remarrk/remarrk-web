@@ -11,6 +11,7 @@ import {firebaseConfig} from "./components/config/FirebaseConfig.js";
 import Login from "./components/Login";
 import Signup from "./components/Signup";
 import Navbar from "./components/Navbar";
+import Favourites from "./components/Favourites";
 
 function App() {
   /* STATES ID's
@@ -31,7 +32,7 @@ function App() {
     <FirebaseAuthProvider {...firebaseConfig} firebase={firebase}>
       <div className='App'>
         <FirebaseAuthConsumer>
-          {({isSignedIn}) => {
+          {({isSignedIn, user}) => {
             elementList.length = 0;
             elementList.push(<Navbar key="nav" signedIn={isSignedIn} state={state} onClick={setAppState}/>)
 
@@ -44,7 +45,7 @@ function App() {
               :
               state === 1 && isSignedIn ?
                 elementList.push(
-                  <h1 key="favourites">Favourites</h1>
+                  <Favourites key="favourites" userId={user.uid}/>
                 )
                 :
                 state === 3 && !isSignedIn ?
