@@ -20,16 +20,26 @@ app.use(express.json());
 app.use(cors());
 const port = 3001;
 
-app.get('/', (req, res) => {
-  res.send('Hello World!');
+app.post('/add-remark', (req, res) => {
+  let remark = {
+    message: req.body.message,
+    tags: req.body.tags,
+  };
+  db.collection('remarks')
+    .add(remark)
+    .then(() => {
+      res.end();
+    });
 });
 
-app.post('/add', (req, res) => {
-  db.collection('temp').add({
-    'test': req.body.test,
-  }).then(() => {
-    res.send("success!");
-  });
+app.get('/get-random-remark', (req, res) => {
+  db.collection('remarks')
+    .get()
+    .then((snapshot) => {
+      let remarks = snapshot.docs;
+      let randIndex = Math.floor(Math.random() * remarks.length);
+      res.send(remarks[randIndex].data());
+    });
 });
 
 app.listen(port, () => {
