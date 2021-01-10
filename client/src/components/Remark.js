@@ -9,7 +9,6 @@ function Remark(props) {
   const getTags = () => {
     if (!props.editable) return;
     axios.get('http://localhost:3001/get-tags').then((res) => {
-      console.log(res.data);
       setTags(res.data);
     });
   };
@@ -25,7 +24,6 @@ function Remark(props) {
   const sendRemark = () => {
     axios.post('http://localhost:3001/add-remark', { message: message, tags: tags }).then((res) => {
       console.log("Remark added. This is where we'd clear those fields and give user feedback.");
-      console.log(res.data);
     });
   };
 
