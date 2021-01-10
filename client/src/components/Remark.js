@@ -25,7 +25,8 @@ function Remark(props) {
   };
 
   const sendRemark = () => {
-    axios.post('http://localhost:3001/add-remark', { message: message, tags: Object.keys(tags) }).then((res) => {
+    let selectedTags = Object.keys(tags).filter(tagName => tags[tagName]);
+    axios.post('http://localhost:3001/add-remark', { message: message, tags: selectedTags }).then((res) => {
       console.log("Remark added. This is where we'd clear those fields and give user feedback.");
     });
   };
