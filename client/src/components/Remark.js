@@ -63,15 +63,6 @@ function Remark(props) {
             setErrorIfEditable({ ...error, lat_message: message, lat_status: true });
             setMessage('');
         }
-
-        setTags(prev => {
-            console.log(`clearing tags`);
-            let curr = {};
-            Object.keys(prev).forEach(tagName => {
-                curr[tagName] = false;
-            });
-            return curr;
-        });
       });
     }
   };
