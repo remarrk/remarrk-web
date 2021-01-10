@@ -5,19 +5,20 @@
   top: 0;
   left: 0;
   width: 100%;
-  height: 3rem;
-  background-color: white;
+  height: 5rem;
+  background-color: #fafafa;
 
   .nav-title {
     position: absolute;
-    left: 1.5rem;
-    top: 0.5rem;
+    left: 2.5rem;
+    top: 1.25rem;
   }
 
   .nav-navigation {
     position: absolute;
-    right: 1.5rem;
-    top: 1rem;
+    right: 2.5rem;
+    top: 2rem;
+    background-color: transparent;
   }
 
   h2 {
@@ -26,7 +27,7 @@
   }
   button {
     cursor: pointer;
-    background-color: white;
+    background-color: transparent;
     border: none;
     color: #1b1b1b;
     text-align: center;
