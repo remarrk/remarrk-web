@@ -16,7 +16,7 @@ function Login() {
           password
           <input type="password" name="password" value={password} onChange={e => setPassword(e.target.value)}/>
         </label>
-        <button type="submit">Sign in With Email</button>
+        <button type="submit">Sign In</button>
       </form>
       <button onClick={signInGoogleAuth}>Sign In With Google</button>
     </>
