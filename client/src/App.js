@@ -1,44 +1,24 @@
-// import React, { useState } from "react";
-// import axios from "axios";
-// import "./App.css";
-// import firebase from "./config/firebase";
-// function App() {
-//   const [test, setTest] = useState(0);
+import React, { useState } from 'react';
+import axios from 'axios';
+import './styles/styles.scss';
 
-//   const testServer = () => {
-//     axios.get("http://localhost:3001/").then((resp) => {
-//       console.log(resp.data);
-//     });
-//   };
+function App() {
+  const [remark, setRemark] = useState();
+  const [message, setMessage] = useState('');
+  const [tags, setTags] = useState([]);
 
-//   const addTestData = () => {
-//     axios.post("http://localhost:3001/add", { test: test }).then((res) => {
-//       console.log(res.data);
-//     });
-//   };
-//   const onClick = () => {
-//     firebase
-//       .auth()
-//       .signInWithPopup(new firebase.auth.GoogleAuthProvider())
-//       .then((response) => {
-//         console.log(response);
-//       });
-//   };
+  const addRemark = () => {
+    axios.post('http://localhost:3001/add-remark', { message: message, tags: tags }).then(() => {
+      console.log("Remark added. This is where we'd clear those fields and give user feedback.");
+    });
+  };
 
-//   return (
-//     <div className="App">
-//       <input
-//         type="text"
-//         value={test}
-//         onChange={(event) => setTest(event.target.value)}
-//       />
-//       <button value="" onClick={addTestData}>
-//         Click here!
-//       </button>
-//       <button onClick={onClick}>sign in </button>
-//     </div>
-//   );
-// }
+  const getRandomRemark = () => {
+    axios.get('http://localhost:3001/get-random-remark').then((res) => {
+      console.log('Received remark!');
+      setRemark(res.data);
+    });
+  };
 
 // export default App;
 import Router from './Router';
@@ -52,11 +32,20 @@ const store = configureStore();
 
 const App = () => {
   return (
-    <Provider store={store}>
-      <Router/>
-    </Provider>
-  )
-
+    <div className='App'>
+      <label>Message:</label>
+      <input type='text' value={message} onChange={(e) => setMessage(e.target.value)} />
+      <br />
+      <label>Tags:</label>
+      <input type='text' value={tags} onChange={(e) => setTags(e.target.value.split(',').map((x) => x.trim()))} />
+      <br />
+      <button onClick={addRemark}>Send remark</button>
+      <hr />
+      <button onClick={getRandomRemark}>Get random remark</button>
+      <p>Remark: {remark ? remark.message : ''}</p>
+      <p>Tags: {remark ? remark.tags.join(', ') : ''}</p>
+    </div>
+  );
 }
 
 export default App
