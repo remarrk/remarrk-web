@@ -40,9 +40,9 @@ function Remark(props) {
 
   useEffect(getTags, [props.editable]);
 
-  const wrapperClass = () => {
+  const getCurrentColor = () => {
       let { editable } = props;
-      return editable ? `remark-wrapper-blue` : `remark-wrapper-peach`;
+      return editable ? `blue` : `peach`;
   };
 
   const getPlaceholder = () => {
@@ -52,7 +52,7 @@ function Remark(props) {
 
   return (
     <div>
-      <div className={`remark-wrapper ${wrapperClass()}`}>
+      <div className={`remark-wrapper remark-wrapper-${getCurrentColor()} shadow-${getCurrentColor()}`}>
         <div className={`remark-text`}>
             <textarea
             className="remark-input"

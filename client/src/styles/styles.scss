@@ -59,7 +59,8 @@ code {
   --dark: #1b1b1b;
   --light: #ffffff;
 
-  --peach-shadow: rgba(255, 137, 111, 0.35);
+  --peach-shadow: rgba(255, 137, 111, 0.95);
+  --blue-shadow: rgba(102, 196, 236, 0.95);
   font-family: 'Manrope', sans-serif;
   font-size: 16px;
 }
@@ -69,9 +70,18 @@ input:focus, textarea:focus, select:focus, button:focus {
   outline: none;
 }
 
+// Shadows
+.shadow-peach {
+  box-shadow: 0.05rem 0.05rem 0.25rem 0rem var(--shadow-peach);
+}
+
+.shadow-blue {
+  box-shadow: 0.05rem 0.05rem 0.25rem 0rem var(--shadow-blue);
+}
+
 // Buttons
 .btn-rect {
-    padding: 0.5rem 1.5rem;
+    padding: 0.5rem 1rem;
     border-radius: 0.5rem;
     border-width: 0.1rem;
     border-style: solid;

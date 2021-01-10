@@ -1,5 +1,5 @@
 import { useState, useEffect } from 'react';
-// import '../styles/tag.scss';
+import '../styles/tag.scss';
 
 function Tag({ tagName, isTagActive, onTagChanged, editable }) {
   const [buttonType, setButtonType] = useState('');
@@ -11,7 +11,7 @@ function Tag({ tagName, isTagActive, onTagChanged, editable }) {
   useEffect(getButtonType, [editable, isTagActive]);
 
   return (
-    <button className={`btn-rect ${buttonType}`} onClick={() => onTagChanged(tagName)}>
+    <button className={`btn-rect ${buttonType} remark-tag`} onClick={() => onTagChanged(tagName)}>
       {tagName}
     </button>
   );
