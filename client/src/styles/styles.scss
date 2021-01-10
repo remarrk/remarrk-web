@@ -1,3 +1,47 @@
+
+$peach: #FF896F;
+$blue: #66C4EC;
+$dark: #1b1b1b;
+$light: #ffffff;
+
+@mixin transform($property) {
+  -webkit-transform: $property;
+  -moz-transform: $property;
+  -o-transform: $property;
+  -ms-transform: $property;
+  transform: $property;
+}
+@mixin transition($property) {
+  -webkit-transition: $property;
+  -moz-transition: $property;
+  -o-transition: $property;
+  transition: $property;
+}
+@mixin keyframes($animation) {
+  @-webkit-keyframes #{$animation} {
+    @content;
+  }
+  @-moz-keyframes #{$animation} {
+    @content;
+  }
+  @-o-keyframes #{$animation} {
+    @content;
+  }
+  @keyframes #{$animation} {
+    @content;
+  }
+}
+@mixin animate($property) {
+  -webkit-animation: $property;
+  -moz-animation: $property;
+  -o-animation: $property;
+  animation: $property;
+}
+
+* {
+  @include transition(all .25s cubic-bezier(0.445, 0.05, 0.55, 0.95))
+}
+
 .App {
   text-align: center;
 }
@@ -70,6 +114,11 @@ input:focus, textarea:focus, select:focus, button:focus {
   outline: none;
 }
 
+// Warnings
+.error {
+  color: $peach;
+}
+
 // Shadows
 .shadow-peach {
   box-shadow: 0.05rem 0.05rem 0.25rem 0rem var(--shadow-peach);
@@ -81,41 +130,107 @@ input:focus, textarea:focus, select:focus, button:focus {
 
 // Buttons
 .btn-rect {
-    padding: 0.5rem 1rem;
-    border-radius: 0.5rem;
-    border-width: 0.1rem;
-    border-style: solid;
-    font-weight: 600;
-    transition: all .3s cubic-bezier(0.445, 0.05, 0.55, 0.95);
-}
+  padding: 0.5rem 1rem;
+  border-radius: 0.5rem;
+  border-width: 0.1rem;
+  border-style: solid;
+  font-weight: 600;
 
-.btn-rect:hover {
-  background-color: transparent;
-  color: var(--dark);
-  border-color: var(--dark);
-  cursor: pointer;
+  &:hover {
+    background-color: transparent;
+    color: $dark;
+    border-color: $dark;
+    cursor: pointer;
+  }
 }
 
 .btn-peach {
-  background-color: var(--peach);
-  color: var(--dark);
-  border-color: var(--peach);
+  background-color:$peach;
+  color: $dark;
+  border-color: $peach;
 }
 
 .btn-peach-outline {
   background-color: transparent;
-  color: var(--peach);
-  border-color: var(--peach);
+  color: $peach;
+  border-color: $peach;
 }
 
 .btn-blue {
-  background-color: var(--blue);
-  color: var(--dark);
-  border-color: var(--blue);
+  background-color: $blue;
+  color: $dark;
+  border-color: $blue;
+}
+
+.btn-dark {
+  background-color: $dark;
+  color: $light;
+  border-color: $dark;
 }
 
 .btn-blue-outline {
   background-color: transparent;
-  color: var(--blue);
-  border-color: var(--blue);
+  color: $blue;
+  border-color: $blue;
+}
+
+.btn-dark-outline {
+  background-color: transparent;
+  color: $dark;
+  border-color: $dark;
+}
+
+.btn-text {
+  cursor: pointer;
+  background-color: transparent;
+  border: none;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+
+  &:hover {
+    color: $dark;
+  }
+}
+
+.btn-text-black {
+  color: $dark;
+}
+
+.btn-text-blue {
+  color: $blue;
+}
+
+// form
+.form {
+  input, label {
+    display: block;
+    width: 20rem;
+    margin-left: auto;
+    margin-right: auto;
+  }
+  label {
+    font-size: 1rem;
+    text-align: left;
+  }
+  input {
+    background-color: transparent;
+    border: none;
+    border-bottom: 2px solid #1b1b1b;
+
+    height: 2rem;
+    margin-top: 0.4rem;
+
+  }
+  input:required:valid {
+    border-bottom: 2px solid $dark;
+  }
+  input:required {
+    box-shadow: none;
+    -webkit-box-shadow: none;
+    border-bottom: 2px solid $peach;
+  }
+  button {
+    margin-top: 1rem;
+  }
 }
