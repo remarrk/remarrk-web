@@ -1,0 +1,40 @@
+@import "styles.scss";
+
+.nav-bar {
+  position: sticky;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 3rem;
+  background-color: white;
+
+  .nav-title {
+    position: absolute;
+    left: 1.5rem;
+    top: 0.5rem;
+  }
+
+  .nav-navigation {
+    position: absolute;
+    right: 1.5rem;
+    top: 0.6rem;
+  }
+
+  h2, button {
+    cursor: pointer;
+  }
+  h2 {
+    margin: 0;
+  }
+  button {
+    background-color: white;
+    border: none;
+    color: #1b1b1b;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-weight: 600;
+    font-size: 1.5rem;
+    margin-left: 1rem;
+  }
+}
