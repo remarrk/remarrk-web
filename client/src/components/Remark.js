@@ -3,15 +3,15 @@ import axios from 'axios';
 import TagList from './TagList';
 import '../styles/remark.scss';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faArrowRight } from '@fortawesome/free-solid-svg-icons';
 import ErrorMessage from './ErrorMessage';
+import { faArrowRight, faArrowUp, faArrowDown, faStar } from '@fortawesome/free-solid-svg-icons';
 
 function Remark(props) {
   const [message, setMessage] = useState('');
   const [tags, setTags] = useState({});
   const [error, setError] = useState({ empty: null, lat_message: '', lat_status: false, message: '' });
   const [isError, setIsError] = useState(false);
-
+  const [id, setId] = useState(null);
   let btnref_send = useRef();
   let btnref_get = useRef();
 
@@ -38,13 +38,14 @@ function Remark(props) {
   const getRandomRemark = () => {
     btnref_get.current.setAttribute('disabled', 'disabled');
     axios.get('http://localhost:3001/get-random-remark').then((res) => {
-      let remark = res.data;
-      setMessage(remark.message);
+      let remarkData = res.data.remarkData;
+      setMessage(remarkData.message);
       let newTags = {};
-      remark.tags.forEach((tag) => (newTags[tag] = false));
+      remarkData.tags.forEach((tag) => (newTags[tag] = false));
       setTags(newTags);
       if (res.status === 200) {
         btnref_get.current.removeAttribute('disabled');
+        setId(res.data.remarkId);
       }
     });
   };
@@ -57,8 +58,6 @@ function Remark(props) {
       btnref_send.current.setAttribute('disabled', 'disabled');
       let selectedTags = Object.keys(tags).filter((tagName) => tags[tagName]);
       axios.post('http://localhost:3001/add-remark', { message: message, tags: selectedTags }).then((res) => {
-        console.log("Remark added. This is where we'd clear those fields and give user feedback.");
-  
         if (res.status === 200) {
             btnref_send.current.removeAttribute('disabled');
             setErrorIfEditable({ ...error, lat_message: message, lat_status: true });
@@ -119,11 +118,23 @@ function Remark(props) {
       console.log(error);
   };
 
+  const setFavourite = (e) => {
+    e.preventDefault();
+    axios.post('http://localhost:3001/add-favourite', { userId: props.userId, remarkId: id })
+      .then((res) => {
+        console.log(res);
+      })
+      .catch((err) => {
+        console.log(err)
+      })
+  }
+
   return (
     <div className={`remark-sides`}>
     {isError && <ErrorMessage error={error} editable={props.editable} setEmpty={removeError}/>}
       <div className={`remark-${getEditable()}-item`}>
         <div className={`remark-wrapper remark-wrapper-${getCurrentColor()} shadow-${getCurrentColor()}`}>
+          {(error.empty !== null) && error.empty && !props.editable ? <h5>{error.message}</h5> : null}
           <div className={`remark-text`}>
             <textarea
               className='remark-input'
@@ -133,6 +144,24 @@ function Remark(props) {
               onChange={(e) => onTextChange(e.target.value)}
             />
           </div>
+          {
+            !props.editable && props.userId ?
+              <div className="manipulate-wrapper">
+                <div className="manipulate-buttons">
+                  <button className="btn-manipulate" onClick={setFavourite}>
+                    <FontAwesomeIcon className={`btn-icon`} icon={faStar} />
+                  </button>
+                  <button className="btn-manipulate" onClick={null}>
+                    <FontAwesomeIcon className={`btn-icon`} icon={faArrowUp} />
+                  </button>
+                  <button className="btn-manipulate" onClick={null}>
+                    <FontAwesomeIcon className={`btn-icon`} icon={faArrowDown} />
+                  </button>
+                </div>
+              </div>
+              :
+              null
+          }
           <div className={`remark-tags`}>
             <TagList editable={props.editable} tags={tags} onTagsChanged={setTags} />
           </div>

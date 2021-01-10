@@ -1,3 +1,5 @@
+@import "styles.scss";
+
 // Wrappers (Divs)
 .remark-wrapper {
   background-color: var(--light);
@@ -7,7 +9,7 @@
   border-radius: 0.8rem;
   border-left: 1rem solid;
 
-  width: 70%;
+  width: 27rem;
   height: 15rem;
   padding: 1.5rem;
 
@@ -98,6 +100,30 @@
   }
 }
 
+.manipulate-wrapper {
+  position: relative;
+  top: -7rem;
+  right: -17rem;
+}
+
+.manipulate-buttons {
+  display: flex;
+  flex-direction: column;
+  .btn-icon {
+    color: $peach;
+    width: 1.75rem;
+    height: 1.75rem;
+    margin: 0.2rem;
+  }
+
+  .btn-manipulate {
+    cursor: pointer;
+    background-color: transparent;
+    border: none;
+  }
+}
+
+
 // Positioning
 .remark-editable-wrapper {
   display: flex;
@@ -117,8 +143,4 @@
 
 .remark-display-item {
   margin-bottom: 3rem;
-}
-
-.remark-sides {
-    width: 50%;
 }

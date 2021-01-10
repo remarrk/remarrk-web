@@ -11,7 +11,7 @@ import remarks from './routes/remark.js';
 app.post('/add-remark', (req, res) => {
   let message = req.body.message;
   let tags = req.body.tags;
-  remarks.addRemark(message, tags).then(() => res.end());
+  remarks.addRemark(message, tags).then((id) => res.send(id));
 });
 
 app.get('/get-random-remark', (req, res) => {

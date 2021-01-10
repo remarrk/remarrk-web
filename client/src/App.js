@@ -39,7 +39,12 @@ function App() {
             state === 0 ?
               elementList.push(
                 <div key="remarks">
-                  <RemarkSet />
+                  {
+                    isSignedIn ?
+                      <RemarkSet userId={user.uid}/>
+                      :
+                      <RemarkSet userId={null}/>
+                  }
                 </div>
               )
               :
