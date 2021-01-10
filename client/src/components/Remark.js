@@ -39,7 +39,7 @@ function Remark(props) {
 
   return (
     <div>
-      <div>
+      <div className="remark-wrapper">
         <input
           readOnly={!props.editable}
           placeholder={"Make someone's day..."}
