@@ -30,14 +30,10 @@ const getTags = async () => {
 };
 
 const addFavourite = async (userId, remarkId) => {
-  return db.collection('favourites').doc(userId).set(
-    {
-      remarkId: remarkId,
-    },
-    {
-      merge: true,
-    }
-  );
+  return db
+    .collection('favourites')
+    .doc(userId)
+    .set({ [remarkId]: true }, { merge: true });
 };
 
 const getFavourites = async (userId) => {
@@ -46,7 +42,7 @@ const getFavourites = async (userId) => {
     .doc(userId)
     .get()
     .then((snapshot) => {
-      return snapshot.docs.map(doc => doc.data().remarkId);
+      return Object.values(snapshot.data());
     });
 };
 
