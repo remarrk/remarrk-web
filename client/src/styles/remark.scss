@@ -74,24 +74,28 @@
   width: 5rem;
   cursor: pointer;
 
-//   float: right;
-//   margin-right: 15%;
-//   margin-left: 15%;
-
   padding: 0.5rem 1rem;
   border-radius: 50%;
   border-width: 0.1rem;
   border-style: solid;
   font-weight: 600;
 
-  transition: all 0.3s cubic-bezier(0.445, 0.05, 0.55, 0.95);
-}
+  transition: all 0.05s cubic-bezier(0.445, 0.05, 0.55, 0.95);
 
-.btn-circle:hover {
-  background-color: transparent;
-  color: var(--dark);
-  border-color: var(--dark);
-  cursor: pointer;
+  .btn-icon {
+    font-size: 2.5rem;
+    color: var(--light);
+  }
+
+  &:hover {
+    background-color: transparent;
+    color: var(--dark);
+    border-color: var(--dark);
+    cursor: pointer;
+    .btn-icon {
+        color: var(--dark);
+    }
+  }
 }
 
 // Positioning
