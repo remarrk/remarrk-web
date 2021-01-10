@@ -4,17 +4,22 @@ import TagList from './TagList';
 import '../styles/remark.scss';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faArrowRight } from '@fortawesome/free-solid-svg-icons';
+import ErrorMessage from './ErrorMessage';
 
 function Remark(props) {
   const [message, setMessage] = useState('');
   const [tags, setTags] = useState({});
   const [error, setError] = useState({ empty: null, lat_message: '', lat_status: false, message: '' });
+  const [isError, setIsError] = useState(false);
+
   let btnref_send = useRef();
   let btnref_get = useRef();
 
   const setErrorIfEditable = (newError) => {
-      if(props.editable) setError(newError);
-  }
+      if(props.editable) {
+          setError(newError);
+          setIsError(true);
+  }};
 
   const onTextChange = (message) => {
         if (error.empty !== null) {
@@ -65,7 +70,7 @@ function Remark(props) {
 
   const handleClick = (e) => {
     if (message.trim() === '' && props.editable) {
-     setErrorIfEditable((prev) => ({ ...prev, empty: true, message: 'Empty text box' }));
+     setErrorIfEditable((prev) => ({ ...prev, empty: true, message: `You can't send an empty remark!` }));
       return;
     }
 
@@ -102,11 +107,23 @@ function Remark(props) {
     return editable ? `editable` : `display`;
   };
 
+  const removeError = () => {
+      console.log('boop');
+      setError(prev => {
+          prev.empty = false;
+          prev.message = '';
+          return prev;
+      })
+
+      setIsError(false)
+      console.log(error);
+  };
+
   return (
     <div className={`remark-sides`}>
+    {isError && <ErrorMessage error={error} editable={props.editable} setEmpty={removeError}/>}
       <div className={`remark-${getEditable()}-item`}>
         <div className={`remark-wrapper remark-wrapper-${getCurrentColor()} shadow-${getCurrentColor()}`}>
-          <div>{(error.empty !== null) & error.empty ? <h5>{error.message}</h5> : null}</div>
           <div className={`remark-text`}>
             <textarea
               className='remark-input'
