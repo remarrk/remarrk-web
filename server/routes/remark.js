@@ -1,16 +1,16 @@
-import db from "../db/firebase.js";
+import db from '../db/firebase.js';
 
 const addRemark = (body) => {
   let remark = {
     message: body.message,
     tags: body.tags,
   };
-  return db.collection("remarks").add(remark);
+  return db.collection('remarks').add(remark);
 };
 
 const getRandomRemark = () => {
   return db
-    .collection("remarks")
+    .collection('remarks')
     .get()
     .then((snapshot) => {
       let remarks = snapshot.docs;
@@ -21,10 +21,11 @@ const getRandomRemark = () => {
 
 const getTags = () => {
   return new Promise((resolve) => {
-    db.collection("tags")
+    db.collection('tags')
       .get()
       .then((snapshot) => {
-        let tags = snapshot.docs.map((doc) => doc.data().tag);
+        let tags = {};
+        snapshot.docs.forEach((doc) => tags[doc.data().tag] = false);
         resolve(tags);
       });
   });

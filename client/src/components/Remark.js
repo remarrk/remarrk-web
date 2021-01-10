@@ -38,7 +38,6 @@ function Remark(props) {
   };
 
   useEffect(getTags, [props.editable]);
-  useEffect(() => console.log("yo"), [tags]);
 
   return (
     <div>

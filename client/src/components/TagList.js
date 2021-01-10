@@ -9,7 +9,7 @@ function TagList({ editable, tags, onTagsChanged }) {
 
   const renderTags = () => {
     let tagsList = [];
-    for (let i = 0; i < tags.length; i++) {
+    for (let i = 0; i < Object.keys(tags).length; i++) {
       tagsList.push(
         <Tag
           key={i}
