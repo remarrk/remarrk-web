@@ -1,21 +1,14 @@
 import React, {useState} from 'react';
-import {signUpEmail} from "./Auth";
 
 function Signup(props) {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [passwordMatch, setPasswordMatch] = useState("");
-  const [error, setError] = useState(null);
 
   function matchPasswords(e, email, password) {
-    if (password === passwordMatch)
-      signUpEmail(e, email, password)
-        .then(() => {
-          props.onClick(e, 0);
-        })
-        .catch(error => {
-          setError(error.code);
-        });
+    if (password === passwordMatch) {
+      //TODO
+    }
   }
 
   return (
