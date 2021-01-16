@@ -1,5 +1,4 @@
 import React from "react";
-import { signOut } from "./Auth.js";
 
 import "../styles/navbar.scss";
 

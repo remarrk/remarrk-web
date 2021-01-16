@@ -14,10 +14,7 @@ const getRandomRemark = async () => {
     .then((snapshot) => {
       let remarks = snapshot.docs;
       let randIndex = Math.floor(Math.random() * remarks.length);
-      return {
-        remarkId: remarks[randIndex].id,
-        remarkData: remarks[randIndex].data()
-      }
+      return remarks[randIndex].data();
     });
 };
 
@@ -38,7 +35,7 @@ const upvoteRemark = async (userId, remarkId) => {
     .doc(remarkId)
     .collection('votes')
     .doc(userId)
-    .set({score: 1});
+    .set({ score: 1 });
 };
 
 const downvoteRemark = async (userId, remarkId) => {
@@ -47,14 +44,14 @@ const downvoteRemark = async (userId, remarkId) => {
     .doc(remarkId)
     .collection('votes')
     .doc(userId)
-    .set({score: -1});
+    .set({ score: -1 });
 };
 
 const addFavourite = async (userId, remarkId) => {
   return db
     .collection('favourites')
     .doc(userId)
-    .set({[remarkId]: true}, {merge: true});
+    .set({ [remarkId]: true }, { merge: true });
 };
 
 const getFavourites = async (userId) => {
