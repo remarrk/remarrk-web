@@ -5,7 +5,9 @@ import './styles/styles.scss';
 
 function App() {
   return (
-    <Navbar />
+    <div className="App">
+      <Navbar />
+    </div>
   );
 }
 
